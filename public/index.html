@@ -4,6 +4,20 @@
   <script src="https://cdn.jsdelivr.net/momentjs/2.29.1/moment.min.js"></script>
   <script>src="index.js"</script>
   <script>
+    const form = document.querySelector("#form");
+    
+
+    form.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const birthYear = document.querySelector("#birthYear").value;
+      const res = await fetch("/calculate-age",{
+        method: 'POST',
+        body: JSON.stringify({birthYear: birthYear }),
+        'content-type' : 'application/json'
+      })
+    })
+
+
     function countdown() {
       const now = moment();
       const year = now.year();
@@ -26,6 +40,6 @@
   <p>
     If you were born on February 29th in a gap year, enter the year you were born and click the button to calculate your age:
   </p>
-  <form action="/calculate-age" method="POST">
-    <input type="text" name="birthYear" placeholder="Enter birth year...">
-    <button type="submit">
+  <form id="form" action="/calculate-age" method="POST">
+    <input id="birthYear" type="text" name="birthYear" placeholder="Enter birth year...">
+    <button id="btn" type="submit">
