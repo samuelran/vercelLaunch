@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>Countdown to Next Leap Year</title>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.29.1/moment.min.js"></script>
+  <script>src="index.js"</script>
+  <script>
+    function countdown() {
+      const now = moment();
+      const year = now.year();
+      const leapYear = moment(`February 29 ${year + 1}`, "MMMM DD YYYY");
+      const diff = moment.duration(leapYear.diff(now));
+      const daysLeft = diff.asDays().toFixed(0);
+      const hoursLeft = diff.hours();
+      const minutesLeft = diff.minutes();
+      const secondsLeft = diff.seconds();
+      document.getElementById("countdown").innerHTML = `${daysLeft} days, ${hoursLeft} hours, ${minutesLeft} minutes, and ${secondsLeft} seconds until the next leap year!`;
+    }
+    setInterval(countdown, 1000);
+  </script>
+</head>
+<body>
+  <h1>Countdown to Next Leap Year</h1>
+  <p id="countdown"></p>
+
+  <h2>Calculate Age for Leap Year Babies</h2>
+  <p>
+    If you were born on February 29th in a gap year, enter the year you were born and click the button to calculate your age:
+  </p>
+  <form action="/calculate-age" method="POST">
+    <input type="text" name="birthYear" placeholder="Enter birth year...">
+    <button type="submit">
